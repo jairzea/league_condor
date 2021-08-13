@@ -16,10 +16,6 @@ class HomePage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Pagina de inicio', style: TextStyle(color: Colors.white)),
-        //   backgroundColor: Color.fromRGBO(75, 120, 170, 1),
-        // ),
       
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +98,7 @@ class HomePage extends StatelessWidget {
                 color: Color.fromRGBO(214, 172, 5, 1),
                 borderRadius: BorderRadius.circular(15),
                 onPressed: () { 
-                  Navigator.pushNamed(context, 'see_leagues'); 
+                  Navigator.pushNamed(context, 'leagues'); 
                 },
                 child: Text(
                   'See leagues',
