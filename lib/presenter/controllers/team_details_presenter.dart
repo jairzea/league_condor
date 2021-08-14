@@ -12,6 +12,7 @@ class _TeamDetailPresenters {
     final answer = await TeamDetailServices().mdlTeamDetail( idTeam );
 
     Map dataTeam = json.decode(answer);
+    
     team = dataTeam['teams'];
 
     return team;

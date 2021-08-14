@@ -31,6 +31,11 @@ dependencies:
   flutter_easyloading: ^3.0.0
   lottie: ^1.1.0
   http: ^0.13.3
+  fluttericon: ^2.0.0
+  rxdart: ^0.27.1
+  url_launcher: ^6.0.9
+  responsive_flutter: ^0.0.4
+  sweetalert: ^0.0.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +76,9 @@ flutter:
       fonts:
         - asset: assets/fonts/IndieFlower.ttf
           weight: 700
+    - family:  CustomIcons
+      fonts:
+       - asset: assets/fonts/CustomIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
