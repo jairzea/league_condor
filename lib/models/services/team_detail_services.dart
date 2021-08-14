@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class CheckLeaguesServices {
+class TeamDetailServices {
 
-  Future<dynamic> mdlGetLeagues() async {
+  Future<dynamic> mdlTeamDetail( idTeam ) async {
 
-    final String urlLeagues = 'https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=Spain';
+    final String urlDetailTeam = 'https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id=$idTeam';
 
     try {
-      final resp = await http.get(Uri.parse(urlLeagues));
+      final resp = await http.get(Uri.parse(urlDetailTeam));
       final decodedData = Utf8Codec().decode(resp.bodyBytes);
      
       return decodedData;
