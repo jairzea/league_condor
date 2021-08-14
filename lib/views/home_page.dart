@@ -1,11 +1,25 @@
 
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:league_condor/presenter/resources/responsive.dart';
+import 'package:league_condor/views/leagues_page.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sweetalert/sweetalert.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget   {
+
+   @override
+  _Home createState() => _Home();
+}
+
+class _Home extends State<HomePage> {
+
+  String _selectedOption = 'Select a league';
+
+  // 4335, 4344, 4332, 4328
+  List<String> _leagues = ['Select a league', 'Spanish league', 'Portuguese Primeira Liga', 'Italian Serie A', 'English Premier League'];
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +39,12 @@ class HomePage extends StatelessWidget {
               image: AssetImage('assets/images/condor_labs.png'),
               width: 100,
             ),
-            SizedBox(height: height * 0.15),
+            SizedBox(height: height * 0.10),
             _startupImage(height, width, responsive),
             SizedBox(height: height * 0.01),
             _myTittle(height, width, responsive),
+            SizedBox(height: height * 0.01),
+            _dropDown(      responsive),
             SizedBox(height: height * 0.01),
             _options(context, height, width, responsive),
             SizedBox(height: height * 0.01),
@@ -76,12 +92,43 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Check the soccer leagues',
+            'Check by football leagues',
               // 'Email: ${ blocLogin.email }',
               style: TextStyle(fontFamily: 'IndieFlower', fontSize: responsive.ip(1.4), color: Colors.grey),
             ),
         ],
       ),
+    );
+  }
+  
+  List<DropdownMenuItem<String>> getOptions(responsive){
+
+    List<DropdownMenuItem<String>> list =[];
+
+    _leagues.forEach((league) { 
+
+      list.add( DropdownMenuItem(
+        child: Text(
+          league,
+          style: TextStyle(fontFamily: 'IndieFlower', fontSize: responsive.ip(1.7), color: Colors.grey),
+          ),
+        value: league,
+      ));
+    });
+
+    return list;
+  }
+
+  Widget _dropDown( responsive ){
+
+    return DropdownButton(
+      value: _selectedOption,
+      items: getOptions(responsive),
+      onChanged: (opt){
+        setState((){
+          _selectedOption = opt.toString();
+        });
+      },
     );
   }
 
@@ -98,10 +145,31 @@ class HomePage extends StatelessWidget {
                 color: Color.fromRGBO(214, 172, 5, 1),
                 borderRadius: BorderRadius.circular(15),
                 onPressed: () { 
-                  Navigator.pushNamed(context, 'leagues'); 
+                  
+                  if (_selectedOption != 'Select a league') {
+
+
+                    Navigator.push( 
+                      context, 
+                      MaterialPageRoute(
+                        builder: (context) => LeaguesPage(todo: _selectedOption )
+                      ),
+                    );
+
+                    // print('kjnkjmnk');
+
+                    // MaterialPageRoute(builder: (context) => LeaguesPage());
+
+                    // Navigator.pushNamed(context, 'leagues', arguments: _selectedOption ); 
+
+                  }else{
+
+                    this._showAlert( context );
+                  }
+                  
                 },
                 child: Text(
-                  'See leagues',
+                  'See teams',
                   style: TextStyle(
                     fontFamily: 'IndieFlower',
                     fontSize: responsive.ip(2), 
@@ -117,5 +185,25 @@ class HomePage extends StatelessWidget {
       ],
     );
   }
+
+  void _showAlert( BuildContext context ) {
+
+      SweetAlert.show(
+        context,
+        title: "Oops.",
+        subtitle: "Please select a league",
+        style: SweetAlertStyle.confirm,
+        confirmButtonText: 'Ok',
+        onPress: (bool isConfirm) {
+          
+          if (isConfirm) {
+            
+            Navigator.of(context).pop();
+            
+          }
+          return false;
+        }
+      );
+    }
 
 }

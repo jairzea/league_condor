@@ -25,10 +25,14 @@ class MyApp extends StatefulWidget  {
   class _MyAppState extends State { 
     @override void initState() { 
     super.initState(); 
-    new Future.delayed( const Duration(seconds: 4), () =>
-    Navigator.pushReplacement( context, 
-    MaterialPageRoute(builder: (context) => HomePage()),
-      ));
+    new Future.delayed( const Duration(seconds: 4), () => 
+      Navigator.pushReplacement( 
+        context, 
+        MaterialPageRoute(
+          builder: (context) => HomePage()
+        ),
+      )
+    );
     }
 
     @override 
@@ -38,7 +42,7 @@ class MyApp extends StatefulWidget  {
        body: Container( 
        height: double.infinity, 
        width: double.infinity, 
-      child: Image.asset("assets/images/splash.gif",
+      child: Image.asset("assets/images/drone-empty-state.gif",
           gaplessPlayback: true, 
           fit: BoxFit.scaleDown,
         ),

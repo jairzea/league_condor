@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 
 class CheckLeaguesServices {
 
-  Future<dynamic> mdlGetLeagues() async {
+  Future<dynamic> mdlGetLeagues( idLeague ) async {
 
-    final String urlLeagues = 'https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=Spain';
+    final String urlLeagues = 'https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=$idLeague';
 
     try {
       final resp = await http.get(Uri.parse(urlLeagues));

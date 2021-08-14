@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:league_condor/presenter/controllers/check_leagues_presenter.dart';
 import 'package:league_condor/presenter/resources/responsive.dart';
+import 'package:league_condor/views/team_detail_page.dart';
 
 class LeaguesPage extends StatelessWidget {
+
+  const LeaguesPage({Key? key, required this.todo}) : super(key: key);
+
+  final String todo;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,7 @@ class LeaguesPage extends StatelessWidget {
     final Responsive responsive = Responsive.of(context);
 
     return FutureBuilder(
-      future: leaguesPresenters.ptrGetLeagues(),
+      future: leaguesPresenters.ptrGetLeagues( todo ),
       initialData: [],
       builder: ( context, AsyncSnapshot<List<dynamic>?> snapshot ){
 
@@ -46,8 +51,13 @@ class LeaguesPage extends StatelessWidget {
                 trailing: Icon( Icons.keyboard_arrow_right, color: Colors.grey ),
                 onTap: () => {
 
-                    Navigator.pushNamed(context, 'team_detail', arguments: leagues[i]['idTeam'].toString())
-                  
+                  Navigator.push( 
+                    context, 
+                    MaterialPageRoute(
+                      builder: (context) => TeamDetail(todo: leagues[i]['idTeam'].toString() )
+                    ),
+                  )
+
                 },
               )
             ),

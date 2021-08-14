@@ -8,7 +8,7 @@ import 'package:league_condor/views/team_detail_page.dart';
 Map<String, Widget Function(BuildContext)> routes(){
   return {
     'home': (BuildContext context) => HomePage(),
-    'leagues': (BuildContext context) => LeaguesPage(),
-    'team_detail': (BuildContext context) => TeamDetail(),
+    'leagues': (BuildContext context) => LeaguesPage( todo: 'league'),
+    'team_detail': (BuildContext context) => TeamDetail( todo: 'idTeam'),
   };
 }

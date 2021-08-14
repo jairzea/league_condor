@@ -10,6 +10,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class TeamDetail extends StatelessWidget {
 
+  const TeamDetail({Key? key, required this.todo}) : super(key: key);
+
+  final String todo;
+
   @override
   Widget build(BuildContext context) {
 
@@ -17,10 +21,8 @@ class TeamDetail extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     final Responsive responsive = Responsive.of(context);
 
-    final idTeam = ModalRoute.of(context)?.settings.arguments.toString() ?? 'No-team-id';
-
     return FutureBuilder(
-      future: teamPresenters.ptrTeamDetail(idTeam),
+      future: teamPresenters.ptrTeamDetail(todo),
       initialData: [{'strTeam' : 'default'}],
       builder: ( context, AsyncSnapshot<List<dynamic>?> snapshot ){
 
